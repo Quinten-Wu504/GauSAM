@@ -1,0 +1,23 @@
+name: gausam
+channels:
+  - conda-forge
+  - nodefaults
+dependencies:
+  - python=3.12
+  - pip
+  - pip:
+      # Official CUDA 12.8 wheels for Linux/Windows NVIDIA hosts.
+      - --extra-index-url https://download.pytorch.org/whl/cu128
+      - torch==2.8.0+cu128
+      - torchvision==0.23.0+cu128
+      - numpy>=1.25,<3
+      - monai>=1.5,<1.7
+      - opencv-python-headless
+      - albumentations==2.0.8
+      - scipy
+      - tensorboard
+      - tqdm
+      - filelock>=3.13,<4
+      - PyYAML>=6,<7
+      - certifi
+      - gdown==5.2.0

@@ -1,0 +1,19 @@
+{
+  "dataset": "polyp",
+  "image_size": 384,
+  "model_type": "vit_b",
+  "n_class": 500,
+  "n_feat": 64,
+  "hidden_list": [
+    256,
+    256
+  ],
+  "lora_rank": 4,
+  "decoder_mode": "frequency",
+  "batch_size": 4,
+  "epochs": 1000,
+  "lr": 0.001,
+  "seed": 2041,
+  "patience": 20,
+  "deterministic": true
+}
