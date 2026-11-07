@@ -190,4 +190,10 @@ class AdaGsSplatting(nn.Module):
         self.feat_coord = make_coord(final_feats.shape[-2:], flatten=False).to(feat).permute(2, 0, 1).unsqueeze(0).expand(feat.shape[0], -1, -1, -1)
         if save_path:
             visualize_embeddings(final_feats, os.path.join(save_path, 'gs_features'))
-        return self.augmentation(feat, final_feats, coord, cell)
+        # Training enforces label_size == image_size; evaluation restores image_size
+        # from the checkpoint. Keep that phase condition when the output grid changes.
+        # The Gaussian field above is still queried directly at the target resolution.
+        phase_cell = torch.ones_like(coord)
+        phase_cell[..., 0] *= 2 / inp.shape[-2]
+        phase_cell[..., 1] *= 2 / inp.shape[-1]
+        return self.augmentation(feat, final_feats, coord, phase_cell)
